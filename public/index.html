@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Weather Dashboard</h1>
+    </header>
+
+    <aside class="search-panel">
+      <h2>Search for a City:</h2>
+      <input type="text" id="city-input" placeholder="San Diego">
+      <button id="search-btn">Search</button>
+      <div class="city-buttons">
+        <button class="city-btn">Atlanta</button>
+        <button class="city-btn">Denver</button>
+        <button class="city-btn">Seattle</button>
+        <button class="city-btn">San Francisco</button>
+        <button class="city-btn">Orlando</button>
+        <button class="city-btn">New York</button>
+        <button class="city-btn">Chicago</button>
+        <button class="city-btn">Austin</button>
+      </div>
+    </aside>
+
+    <main class="weather-display">
+      <!-- Current Weather Section -->
+      <section id="current-weather" class="weather-section">
+        <h2 id="current-city">City (Date)</h2>
+        <div class="current-weather-info">
+          <img id="current-icon" src="" alt="Weather Icon" class="weather-icon">
+          <div id="current-details">
+            <p>Temp: <span id="current-temp">--</span>°F</p>
+            <p>Wind: <span id="current-wind">--</span> MPH</p>
+            <p>Humidity: <span id="current-humidity">--</span>%</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5-Day Forecast Section -->
+      <section id="forecast">
+        <h2>5-Day Forecast:</h2>
+        <div id="forecast-cards" class="forecast-cards">
+          <!-- Forecast cards will be dynamically generated here -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
