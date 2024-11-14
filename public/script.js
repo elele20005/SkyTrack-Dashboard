@@ -1,13 +1,20 @@
 const apiKey = 'f414d6206e7ed02b0c8787acc24c6b2a'; // Replace with your OpenWeatherMap API Key
 
+// Load search history from localStorage on page load
+document.addEventListener('DOMContentLoaded', loadSearchHistory);
+
 document.getElementById('search-btn').addEventListener('click', () => {
   const city = document.getElementById('city-input').value;
-  fetchWeather(city);
+  if (city) {
+    fetchWeather(city);
+    updateSearchHistory(city);
+  }
 });
 
 document.querySelectorAll('.city-btn').forEach(button => {
   button.addEventListener('click', () => {
     fetchWeather(button.textContent);
+    updateSearchHistory(button.textContent);
   });
 });
 
@@ -27,11 +34,10 @@ function displayCurrentWeather(data) {
   const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   
   document.getElementById('current-city').textContent = `${data.name} (${new Date().toLocaleDateString()})`;
-  document.getElementById('current-temp').textContent = `${data.main.temp}`;
-  document.getElementById('current-wind').textContent = `${data.wind.speed}`;
-  document.getElementById('current-humidity').textContent = `${data.main.humidity}`;
+  document.getElementById('current-temp').textContent = `Temp: ${data.main.temp} °F`;
+  document.getElementById('current-wind').textContent = `Wind: ${data.wind.speed} MPH`;
+  document.getElementById('current-humidity').textContent = `Humidity: ${data.main.humidity} %`;
 
-  // Display the current weather icon
   document.getElementById('current-icon').src = iconUrl;
   document.getElementById('current-icon').alt = data.weather[0].description;
 }
@@ -50,7 +56,6 @@ function displayForecast(forecast) {
   const forecastCards = document.getElementById('forecast-cards');
   forecastCards.innerHTML = '';
   
-  // Filter for noon forecasts (every 8th item in the list)
   forecast
     .filter((_, index) => index % 8 === 0)
     .slice(0, 5)
@@ -69,4 +74,32 @@ function displayForecast(forecast) {
       `;
       forecastCards.appendChild(card);
     });
+}
+
+function updateSearchHistory(city) {
+  let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+
+  if (!searchHistory.includes(city)) {
+    searchHistory.unshift(city);
+    searchHistory = searchHistory.slice(0, 5); // Limit to the last 5 searches
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+  }
+  displaySearchHistory();
+}
+
+function displaySearchHistory() {
+  const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+  const historyContainer = document.getElementById('search-history');
+  historyContainer.innerHTML = '';
+
+  searchHistory.forEach(city => {
+    const listItem = document.createElement('li');
+    listItem.textContent = city;
+    listItem.addEventListener('click', () => fetchWeather(city));
+    historyContainer.appendChild(listItem);
+  });
+}
+
+function loadSearchHistory() {
+  displaySearchHistory();
 }
