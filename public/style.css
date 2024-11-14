@@ -86,3 +86,31 @@ body {
   margin-bottom: 0.5rem;
 }
 
+
+
+.recent-searches {
+  margin-top: 1rem;
+}
+
+.recent-searches h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#search-history {
+  list-style: none;
+  padding: 0;
+}
+
+#search-history li {
+  cursor: pointer;
+  background-color: #dcdcdc;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 3px;
+  text-align: center;
+}
+
+#search-history li:hover {
+  background-color: #c0c0c0;
+}
