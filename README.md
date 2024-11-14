@@ -88,7 +88,8 @@ This Challenge combines many of the skills covered so far. In addition to the us
 
 command:  `npm start` 
 
-## Check Out The Deployement URL bieng used below:
+## Deployement URL
+You can check out the deployment url being used below
 https://skytrack-dashboard.onrender.com
 
 
